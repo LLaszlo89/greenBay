@@ -8,21 +8,21 @@ export class SessionService {
   }
 
   async login({ username, password }) {
-    if (!username) {
+    if (!username) { 
       throw createError(401, "Username is missing");
     } else if (!password) {
       throw createError(401, "Password is missing");
     } else {
-      console.log("This is the username before DB  1#" , username)
-      const user = await this.userRepository.user(username);    /* !!!! */
-      console.log("This is the user after DB 3#" , user)
+      const user = await this.userRepository.user(username); // user.results[0]
       if (user.results.length <= 0) {
         throw createError(404, "User not exists");
       } else if (
-        !(await this.passwordValidationService.passwordCheck(
+        password.toString() !== user.results[0].password    // password.toString()  extra ell
+
+        /*         !(await this.passwordValidationService.passwordCheck(
           password,
           user.results[0].password
-        ))
+        )) */
       ) {
         throw createError(401, "Password is incorrect");
       } else {
