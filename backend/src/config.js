@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 export default {
   mysql: {
     host: process.env.MYSQL_HOST,
