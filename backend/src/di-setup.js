@@ -1,43 +1,39 @@
-import * as awilix from 'awilix';
+import * as awilix from "awilix";
 
-import { db } from './data/connection';
+import { db } from "./data/connection";
 
 //Import Controllers & Services
 
-import { SessionService } from './services/SessionService'
-import { PasswordValidationService } from './services/PasswordValidationService'
+import { SessionService } from "./services/SessionService";
+import { PasswordValidationService } from "./services/PasswordValidationService";
+import  AddNewUser from "./services/newUser";
 
-import {SessionController} from './controllers/SessionController'
+import { SessionController } from "./controllers/SessionController";
 
-import UserRepository from './repository/UserRepository'
-import ItemsRepository from './repository/ItemsRepository'
+import UserRepository from "./repository/UserRepository";
+import ItemsRepository from "./repository/ItemsRepository";
 
 // Create container
 export const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
 });
 
-
-// Register 
+// Register
 export const setupDI = () => {
   container.register({
     // db
-    /* db: awilix.asValue(db), */
-    
+    db: awilix.asValue(db),
+
     //Controllers
-    sessionController: awilix.asClass(SessionController),  
-    
-  
-    
+    sessionController: awilix.asClass(SessionController),
+
     //Services
     sessionService: awilix.asClass(SessionService),
     passwordValidationService: awilix.asClass(PasswordValidationService),
-    
+    addNewUser: awilix.asClass(AddNewUser),
+
     //Repo
     userRepository: awilix.asClass(UserRepository),
     itemsRepository: awilix.asClass(ItemsRepository),
-     
-    
-
   });
 };

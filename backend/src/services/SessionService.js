@@ -8,22 +8,15 @@ export class SessionService {
   }
 
   async login({ username, password }) {
-    if (!username) { 
+    if (!username) {
       throw createError(401, "Username is missing");
     } else if (!password) {
       throw createError(401, "Password is missing");
     } else {
-      const user = await this.userRepository.user(username); // user.results[0]
+      const user = await this.userRepository.user(username);
       if (user.results.length <= 0) {
         throw createError(404, "User not exists");
-      } else if (
-        password.toString() !== user.results[0].password    // password.toString()  extra ell
-
-        /*         !(await this.passwordValidationService.passwordCheck(
-          password,
-          user.results[0].password
-        )) */
-      ) {
+      } else if (!(await this.passwordValidationService.passwordCheck( password,  user.results[0].password))) {
         throw createError(401, "Password is incorrect");
       } else {
         const tokenData = {
@@ -32,7 +25,6 @@ export class SessionService {
         };
         return {
           token: jwt.sign(tokenData, process.env.ACCESS_TOKEN_SECRET),
-          /* user: tokenData.user_name, */
         };
       }
     }

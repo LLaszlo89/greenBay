@@ -1,6 +1,6 @@
 import { db } from "../data/connection";
 
-export default class   {
+export default class ItemsRepository {
   constructor() {}
 
   async showAllItems() { /* Only sellable */

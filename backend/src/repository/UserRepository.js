@@ -3,18 +3,16 @@ import { db } from "../data/connection";
 export default class UserRepository {
   constructor() {}
 
-  /*   async saveNewUser({ user_name, email, cash_balance }) {    IF I HAVE TIME
+   async saveNewUser(name, email, password, cash_balance) {   
     await db.query(
-      "INSERT INTO users (user_name , email , cash_balance)VALUES(?,?,?)",
-      [user_name, email, cash_balance]
+      "INSERT INTO users (name , email , password, cash_balance)VALUES(?,?,?,?)",
+      [name, email, password, cash_balance]
     );
-  } */
+  } 
 
   async user(name){
-    console.log("This is the username Inside the  DB query  2#" , name)
-
     try {
-      return await db.query("SELECT * FROM users WHERE user_name = ?", [name]);
+      return await db.query("SELECT * FROM users WHERE name = ?", [name]);
     } catch (error) {
       console.log(error)
     }
