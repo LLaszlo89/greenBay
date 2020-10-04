@@ -18,14 +18,19 @@ router.post('/session', (req,res)=>{
   sessionController.post(req, res)
 })
 
+ /* show all  item  */
+router.get('/items' , (req,res)=>{     
+  const data = req.body
+  res.json(data)
+})
  /* add new item  */
-router.post('/posts' , (req,res)=>{     
+router.post('/items' , (req,res)=>{     
   const data = req.body
   res.json(data)
 })
 
  /* update new item  */
-router.put('/update_item' , (req,res)=>{     
+router.put('/items/:id' , (req,res)=>{     
   const data = req.body
   itemsRepository.
   console.log(data)

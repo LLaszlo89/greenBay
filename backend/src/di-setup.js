@@ -35,5 +35,6 @@ export const setupDI = () => {
     //Repo
     userRepository: awilix.asClass(UserRepository),
     itemsRepository: awilix.asClass(ItemsRepository),
+    
   });
 };
