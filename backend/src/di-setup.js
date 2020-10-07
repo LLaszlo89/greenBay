@@ -13,6 +13,9 @@ import { SessionController } from "./controllers/SessionController";
 import UserRepository from "./repository/UserRepository";
 import ItemsRepository from "./repository/ItemsRepository";
 
+import {AuthenticateMiddleware} from "./middlewares/authenticate";
+
+
 // Create container
 export const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
@@ -23,6 +26,7 @@ export const setupDI = () => {
   container.register({
     // db
     db: awilix.asValue(db),
+    authenticateMiddleware: awilix.asClass(AuthenticateMiddleware),
 
     //Controllers
     sessionController: awilix.asClass(SessionController),

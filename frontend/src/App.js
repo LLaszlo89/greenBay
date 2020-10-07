@@ -6,6 +6,8 @@ import Header from "./components/Header/Header";
 import Shop from "./components/Shop/Shop";
 import SaleItems from "./components/SaleItems/SaleItems";
 import NoMatch from "./components/NoMatch/NoMatch";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import FocusOnItem from './components/FocusOnItem/FocusOnItem'
 
 function App() {
   return (
@@ -13,10 +15,12 @@ function App() {
       <div className="App">
         <Header />
         <Switch>
-          <Route exact path="/" component={Login} />    {/* -> session */}
-          <Route exact path="/shop" component={Shop} /> {/* ->  */}
-          <Route exact path="/sale" component={SaleItems} />
-          <Route  exact path="*" component={NoMatch} />
+          <Route exact path="/" component={Login} />
+          {/* !!!!!!!!!!!!! IF no token at localStorage redirect to homepage !!!!!!!!!!!!! */}
+          <PrivateRoute exact path="/shop" component={Shop} to="/" />
+          <PrivateRoute exact path="/sale" component={SaleItems} to="/" />
+          <Route exact path="/:item_id" component={FocusOnItem} />
+          <Route exact path="*" component={NoMatch} />
         </Switch>
       </div>
     </BrowserRouter>

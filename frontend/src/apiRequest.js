@@ -1,9 +1,9 @@
-const sendHttpRequest = async (method, url, data) => {
+const sendHttpRequest = async (method, url, data, config = { "Content-Type": "application/json" } ) => {
   try {
     const response = await fetch(url, {
-      method: method,
-      body: JSON.stringify(data),
-      headers: data ? { "Content-Type": "application/json" } : {},
+      method: method ,
+      body: JSON.stringify(data), 
+      headers: data ? config : {}
     });
     return await response.json();
   } catch (error) {

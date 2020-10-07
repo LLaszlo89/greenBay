@@ -1,28 +1,30 @@
 import React from "react";
+import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
+import { connect } from "react-redux";
+import { downloadItems } from "../../redux/actions/itemsActions";
+
 import sendHttpRequest from "../../apiRequest";
 
-const URL = "http://localhost:3000/api/session";
+const Login = (props) => {
+  const initialState = {
+    username: "",
+    password: "",
+  };
 
-const initialState = {
-  name: "",
-  password: "",
-};
-
-export default function Login() {
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState(initialState);
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
 
-  const handleError = () => {
-    setError(true);
-  };
+  useEffect(() => {
+    console.log("FIRS TIME RENDERED");
+  }, []);
 
   const handleLoginToggle = () => {
     setOpen(!open);
@@ -36,19 +38,14 @@ export default function Login() {
   };
 
   const onSubmit = async () => {
-    const user = {
-      username: values.name,
-      password: values.password,
-    };
-    const response = await sendHttpRequest("POST", URL, user);
-    if (!response.token) {
-      handleError();
-      setErrorMessage(response)
+    const data = await sendHttpRequest(  "POST",  `http://localhost:3000/api/session`,  values );
+    if (data.message) {
+      setErrorMessage(data.message);
+      setError(true);
     } else {
-      console.log(response);
+ 
+      props.download(data)
     }
-    //   REDIRECT TO SHOP
-    console.log(response);
   };
 
   return (
@@ -66,12 +63,14 @@ export default function Login() {
         <DialogTitle id="form-dialog-title">
           Please enter your login details:{" "}
         </DialogTitle>
-        <Typography align="center" variant="h4" color="error" >{ errorMessage }</Typography>
+        <Typography align="center" variant="h4" color="error">
+          {errorMessage}
+        </Typography>
         <DialogContent>
           <TextField
             placeholder="Enter Your Name"
             label="Name"
-            name="name" // Without it will not update state!!!!!!!!!!!
+            name="username" // Without it will not update state!!!!!!!!!!!
             value={values.name}
             onChange={handleInputChange}
             margin="normal"
@@ -102,4 +101,12 @@ export default function Login() {
       </Dialog>
     </div>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    download: (data) => dispatch(downloadItems(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
