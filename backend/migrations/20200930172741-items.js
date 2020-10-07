@@ -16,13 +16,14 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable('Items', {
-    user_id: { type: 'int', primaryKey: true, unsigned: true },
+    id: { type: 'int', primaryKey: true, unsigned: true, unique: 'true', autoIncrement: true },
+    user_name: { type: 'string' },
     title: { type: 'string' },
     description: { type: 'string' },
     URL: { type: 'string'  },
     price: { type: 'int', unsigned: true, defaultValue: 0 },
     forSale: { type: 'boolean', defaultValue: true },
-    soldTo: { type: 'int'}
+    soldTo: { type: 'string'}
   });
 };
 

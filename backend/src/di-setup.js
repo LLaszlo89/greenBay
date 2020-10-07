@@ -6,15 +6,16 @@ import { db } from "./data/connection";
 
 import { SessionService } from "./services/SessionService";
 import { PasswordValidationService } from "./services/PasswordValidationService";
-import  AddNewUser from "./services/newUser";
+
+import AddNewUser from "./services/newUser";
 
 import { SessionController } from "./controllers/SessionController";
+import { ItemsController } from "./controllers/ItemsController";
 
 import UserRepository from "./repository/UserRepository";
 import ItemsRepository from "./repository/ItemsRepository";
 
-import {AuthenticateMiddleware} from "./middlewares/authenticate";
-
+import { AuthenticateMiddleware } from "./middlewares/authenticate";
 
 // Create container
 export const container = awilix.createContainer({
@@ -30,6 +31,7 @@ export const setupDI = () => {
 
     //Controllers
     sessionController: awilix.asClass(SessionController),
+    itemsController: awilix.asClass(ItemsController),
 
     //Services
     sessionService: awilix.asClass(SessionService),
@@ -39,6 +41,5 @@ export const setupDI = () => {
     //Repo
     userRepository: awilix.asClass(UserRepository),
     itemsRepository: awilix.asClass(ItemsRepository),
-    
   });
 };

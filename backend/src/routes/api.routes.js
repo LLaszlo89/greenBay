@@ -7,6 +7,7 @@ setupDI();
 
 // Only controllers need to be resolved  ???
 const sessionController = container.resolve("sessionController");
+const itemsController = container.resolve("itemsController");
 const authenticateMiddleware = container.resolve("authenticateMiddleware");
 
 const router = express.Router();
@@ -20,7 +21,7 @@ router.post("/session", (req, res) => {
 
 /* show all  item  barki lekerhet de hozzadni  csak tokkennel */
 router.get("/items", (req, res) => {
-  res.json({ data: "LELELELEL" });
+  itemsController.getItemsForSale(req,res)
 });
                                         /*   router.use((req, res, next) =>
                                         authenticateMiddleware.authenticate(req, res, next)
@@ -28,18 +29,17 @@ router.get("/items", (req, res) => {
 
 /* add new item  */
 router.post("/items", (req, res) => {
-  const data = req.body;
-  console.log("this is the post req body ",data)
-  res.json(data);
+  itemsController.createNewItems(req,res)
 });
 
 /* update new item  */
-router.put("/items/:id", (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  console.log("This is the param and teh body :" ,{ id, body })
+router.get("/items/:id", (req, res) => {
+  itemsController.getItemsById(req,res)
+});
 
-  res.json({ id, body });
+router.put("/items", (req, res) => {
+  itemsController.makeItemSold(req,res)
+
 });
 
 export default router;

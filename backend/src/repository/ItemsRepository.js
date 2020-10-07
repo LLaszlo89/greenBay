@@ -3,22 +3,19 @@ import { db } from "../data/connection";
 export default class ItemsRepository {
   constructor() {}
 
-  async showAllItems() { /* Only sellable */
-    await db.query("SELECT * FROM items WHERE forSale = true");
+  async showAllItems() {   
+    return await db.query("SELECT * FROM items WHERE forSale = true");
   }
   async showSpecialItems(id) {
-    await db.query(
-      "SELECT * FROM items WHERE id =?", [id] /* ALL even if its sold */
+    return await db.query("SELECT * FROM items WHERE id = ?",  [id]  );
+  }
+  async saveNewItem({ user_id, title, description, URL, price }) {
+    return await db.query(
+      "INSERT INTO items (user_id, title, description, URL, price )VALUES(?,?,?,?,?)",
+      [user_id, title, description, URL, price ]
     );
   }
-  async saveNewItem({ item_name, description, price, imgUrl, seller, forSale,}) {
-    await db.query(
-      "INSERT INTO items (item_name, description, price, imgUrl,seller, forSale)VALUES(?,?,?)",
-      [item_name, description, price, imgUrl, seller, forSale || true]
-    );
-  }
-
-  async updateItemStatus(id) {
-    await db.query(`UPDATE items set forSale = false`);
+  async updateItemStatus(id , name) {
+    return await db.query( `UPDATE items set forSale = false , soldTo=? WHERE id=?`, [ name , id] );
   }
 }

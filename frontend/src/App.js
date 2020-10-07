@@ -19,7 +19,7 @@ function App() {
           {/* !!!!!!!!!!!!! IF no token at localStorage redirect to homepage !!!!!!!!!!!!! */}
           <PrivateRoute exact path="/shop" component={Shop} to="/" />
           <PrivateRoute exact path="/sale" component={SaleItems} to="/" />
-          <Route exact path="/:item_id" component={FocusOnItem} />
+{/*           <Route exact path="/:item_id" component={FocusOnItem} />  Nem Kell Backenden lekezelem??*/}          
           <Route exact path="*" component={NoMatch} />
         </Switch>
       </div>
