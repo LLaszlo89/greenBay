@@ -42,36 +42,22 @@ export class ItemsController {
   async makeItemSold(req, res) {
     try {
       const { id, name } = req.body;
-
       const user_cash = await this.userRepository.user(name);
       const isForSale = await this.itemsRepository.showSpecialItems(id);
-      console.log(
-        "$$$",
-        user_cash.results[0].cash_balance,
-        "???",
-        isForSale.results[0].forSale
-      );
 
       if (!isForSale.results[0].forSale) {
         res.status(404).json({ message: "Item is already sold" });
       } else {
-        const new_balance =
-          user_cash.results[0].cash_balance - isForSale.results[0].price;
+        const new_balance = user_cash.results[0].cash_balance - isForSale.results[0].price;
 
         if (new_balance <= 0) {
           res.status(400).json({ message: " Balance is not enough" });
         } else {
-          const user_update = await this.userRepository.updateUser(
-            name,
-            new_balance
-          );
-          const item_update = await this.itemsRepository.updateItemStatus(
-            id,
-            name
-          );
+           await this.userRepository.updateUser( name, new_balance );
+           await this.itemsRepository.updateItemStatus( id, name );
         }
         res.status(200).json({
-          message: `Thank you for buying at us! You new balance is : ${new_balance} green_$ `,
+          message: `Thank you for your purchase! You new balance is : ${new_balance} green_$ `,
         });
       }
     } catch (error) {

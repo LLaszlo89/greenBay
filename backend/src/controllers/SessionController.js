@@ -11,14 +11,14 @@ export class SessionController {
       return res.status(err.status).json(err.message);
     }
   }
-}
-
-/* fetch('/user/data', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer' + authToken
+  async createNewUser(req, res) {
+    const user = req.body;
+    try {
+      const data = await this.sessionService.addNewUser(user);
+      data.results.affectedRows > 0 ?  res.status(201).json({message :"Thanks for your registration "}) :
+     res.status(404).json({message : "Something wrong wrong , pleas try again"})
+    } catch (err) {
+      return res.status(err.status).json(err.message);
+    }
   }
-})
-.then(res => res.json())
-.then(data => { console.log(data) })
-.catch(err => { console.log(err) }) */
+}

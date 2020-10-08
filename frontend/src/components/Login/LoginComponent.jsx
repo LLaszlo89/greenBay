@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,7 +8,8 @@ import { Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { downloadItems } from "../../redux/actions/itemsActions";
 
-import sendHttpRequest from "../../apiRequest";
+import  ApiReq  from "../../apiRequest";
+const apiReq = new ApiReq()
 
 const Login = (props) => {
   const initialState = {
@@ -21,10 +21,6 @@ const Login = (props) => {
   const [values, setValues] = React.useState(initialState);
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
-
-  useEffect(() => {
-    console.log("FIRS TIME RENDERED");
-  }, []);
 
   const handleLoginToggle = () => {
     setOpen(!open);
@@ -38,14 +34,15 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
-    const data = await sendHttpRequest(  "POST",  `http://localhost:3000/api/session`,  values );
+
+    const data = await apiReq.sendHttpRequest(  "POST",  `http://localhost:3000/api/session`,  values );
     if (data.message) {
       setErrorMessage(data.message);
       setError(true);
     } else {
- 
       props.download(data)
-    }
+      props.history.push("/shop")
+    }   
   };
 
   return (

@@ -9,10 +9,10 @@ export default class ItemsRepository {
   async showSpecialItems(id) {
     return await db.query("SELECT * FROM items WHERE id = ?",  [id]  );
   }
-  async saveNewItem({ user_id, title, description, URL, price }) {
+  async saveNewItem({ user_name, title, description, URL, price }) {
     return await db.query(
-      "INSERT INTO items (user_id, title, description, URL, price )VALUES(?,?,?,?,?)",
-      [user_id, title, description, URL, price ]
+      "INSERT INTO items (user_name, title, description, URL, price )VALUES(?,?,?,?,?)",
+      [user_name, title, description, URL, price ]
     );
   }
   async updateItemStatus(id , name) {

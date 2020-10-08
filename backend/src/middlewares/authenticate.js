@@ -1,3 +1,6 @@
+//import Joi from 'joi';
+const Joi = require('joi');
+
 export class AuthenticateMiddleware {
   constructor({ sessionService }) {
     this.sessionService = sessionService;
@@ -15,3 +18,14 @@ export class AuthenticateMiddleware {
     }
   }
 }
+
+
+/* fetch('/user/data', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer' + authToken
+  }
+})
+.then(res => res.json())
+.then(data => { console.log(data) })
+.catch(err => { console.log(err) }) */

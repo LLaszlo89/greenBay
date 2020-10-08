@@ -7,8 +7,6 @@ import { db } from "./data/connection";
 import { SessionService } from "./services/SessionService";
 import { PasswordValidationService } from "./services/PasswordValidationService";
 
-import AddNewUser from "./services/newUser";
-
 import { SessionController } from "./controllers/SessionController";
 import { ItemsController } from "./controllers/ItemsController";
 
@@ -36,7 +34,6 @@ export const setupDI = () => {
     //Services
     sessionService: awilix.asClass(SessionService),
     passwordValidationService: awilix.asClass(PasswordValidationService),
-    addNewUser: awilix.asClass(AddNewUser),
 
     //Repo
     userRepository: awilix.asClass(UserRepository),
