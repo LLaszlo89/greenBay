@@ -2,6 +2,7 @@ export const DOWNLOAD_ALL_ITEMS = "DOWNLOAD_ALL_ITEMS";
 export const SHOW_ITEM_AFTER_ID = "SHOW_ITEM_AFTER_ID";
 export const HIDE_SOLD_ITEM = "HIDE_SOLD_ITEM";
 export const ADD_NEW_ITEM = "ADD_NEW_ITEM";
+export const ITEM_NOT_FOUND = "ITEM_NOT_FOUND";
 
 export const ADD_NEW_USER = "ADD_NEW_USER";
 export const CHANGE_CASH_BALANCE = "CHANGE_CASH_BALANCE";

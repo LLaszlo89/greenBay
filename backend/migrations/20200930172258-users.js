@@ -20,7 +20,7 @@ exports.up = function (db) {
     name: { type: 'string', unique: 'true', notNull: true, length: 25 },
     email: { type: 'string' },
     password: { type: 'string' ,  notNull: true },
-    cash_balance: { type: 'int', unsigned: true, defaultValue: 0 }
+    cash_balance: { type: 'int', unsigned: true, defaultValue: 0 },
   });
 };
 

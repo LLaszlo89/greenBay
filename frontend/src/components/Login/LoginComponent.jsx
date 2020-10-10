@@ -7,11 +7,30 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { downloadItems } from "../../redux/actions/itemsActions";
+import ApiReq from "../../apiRequest";
+import { makeStyles } from "@material-ui/core/styles";
 
+<<<<<<< HEAD
 import  ApiReq  from "../../apiRequest";
 const apiReq = new ApiReq()
+=======
+const useStyles = makeStyles({
+  button: {
+    background: "linear-gradient(45deg, #52b202 10%, #91ff35 90%)",
+    color: "white",
+    fontSize: 20,
+    fontFamily: "georgia",
+  },
+  floatingLabelFocusStyle: {
+    color: "#52b202"
+}
+});
+
+const apiReq = new ApiReq();
+>>>>>>> new_feat
 
 const Login = (props) => {
+  const classes = useStyles();
   const initialState = {
     username: "",
     password: "",
@@ -34,29 +53,47 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
+<<<<<<< HEAD
 
     const data = await apiReq.sendHttpRequest(  "POST",  `http://localhost:3000/api/session`,  values );
+=======
+    const data = await apiReq.sendHttpRequest(
+      "POST",
+      `http://localhost:3000/api/session`,
+      values
+    );
+>>>>>>> new_feat
     if (data.message) {
       setErrorMessage(data.message);
       setError(true);
     } else {
+<<<<<<< HEAD
       props.download(data)
       props.history.push("/shop")
     }   
+=======
+      props.download(data);
+      props.history.push("/shop");
+    }
+>>>>>>> new_feat
   };
 
   return (
     <div>
-      <Typography align={"center"}>
+      <Typography variant="h4" align={"center"}>
         Welcome to the coolest web shop on the planet earth , to enjoy all the
         benefits please log in
       </Typography>
       <Typography align={"center"}>
-        <Button variant="outlined" color="primary" onClick={handleLoginToggle}>
+        <Button
+          variant="outlined"
+          className={classes.button}
+          onClick={handleLoginToggle}
+        >
           Login
         </Button>
       </Typography>
-      <Dialog open={open} onClose={handleLoginToggle} fullWidth>
+      <Dialog open={open} onClose={handleLoginToggle} className={classes.root} fullWidth>
         <DialogTitle id="form-dialog-title">
           Please enter your login details:{" "}
         </DialogTitle>
@@ -67,6 +104,8 @@ const Login = (props) => {
           <TextField
             placeholder="Enter Your Name"
             label="Name"
+            InputLabelProps={{className: classes.floatingLabelFocusStyle}}
+            floatingLabelFocusStyle= {{className: classes.floatingLabelFocusStyle}}
             name="username" // Without it will not update state!!!!!!!!!!!
             value={values.name}
             onChange={handleInputChange}
@@ -78,16 +117,18 @@ const Login = (props) => {
           <TextField
             placeholder="Enter Your Password"
             label="Password"
-            name="password" //state name so we can use it
+            name="password"
             value={values.password}
             onChange={handleInputChange}
+            InputLabelProps={{className: classes.floatingLabelFocusStyle}}
+            floatingLabelFocusStyle= {{className: classes.floatingLabelFocusStyle}}
             margin="normal"
             fullWidth
             error={error}
           />
           <br />
           <Button
-            color="primary"
+            className={classes.button}
             variant="contained"
             type="submit"
             onClick={onSubmit}

@@ -1,27 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       width: "25ch",
-      
     },
   },
 }));
 
+
 const SaleItems = () => {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [price, setPrice] = useState(null);
+  const [description, setDescription] = useState("");
   const classes = useStyles();
+
+  const handelInput=()=>{
+    
+  }
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
-        <Grid container spacing={2} direction="column" justify="center" alignItems="center"  >
-          <Grid item >
+        <Grid
+          container
+          spacing={2}
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item>
             <TextField
               id="outlined-title-input"
               label="Title"
@@ -54,7 +68,9 @@ const SaleItems = () => {
             autoComplete="current-description"
             variant="outlined"
           />
-          <Button  variant="contained" color="primary">Save item</Button>
+          <Button variant="contained" color="primary">
+            Save item
+          </Button>
         </Grid>
       </div>
     </form>

@@ -2,8 +2,10 @@ import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import { Grid } from "@material-ui/core";
 
+import { connect } from "react-redux"
 
-const Content = () => {
+
+const Content = (props) => {
   const data = [
     {
       title: "Keurig K-Duo",
@@ -66,6 +68,9 @@ const Content = () => {
         "https://images-na.ssl-images-amazon.com/images/I/61KBB8K1wDL._AC_SL1000_.jpg",
     },
   ];
+
+  console.log(props.list)
+
   const ItemsCards = (item) => {
     return (
       <Grid item xs={12} sm={4}>
@@ -80,5 +85,9 @@ const Content = () => {
     </Grid>
   );
 };
-
-export default Content;
+const mapStateToProps=(state)=>{
+  return{
+    list : state.items.items
+  }
+}
+export default connect(mapStateToProps)(Content);

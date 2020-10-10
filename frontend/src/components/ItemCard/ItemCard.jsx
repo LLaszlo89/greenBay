@@ -7,28 +7,38 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { CardMedia } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {height:"300px" , width: "350px"},
+  img: {height:"100px"},
+
+}));
 
 
 const ItemCard = props => {
+  const classes = useStyles();
+
   const {  title, price, description, imageUrl } = props;
   return (
-    <Grid container   justify="space-around"
+    <Grid container justify="space-around"
     alignItems="center"  >
   
-    <Card style={ {height:"250" , width: "300px"}}>
+    <Card className={classes.root}>
       <CardHeader
         title={title}
         subheader={price}
       />
-      <CardMedia style={{ height: "200px" }} image={imageUrl} />  
+      <CardMedia className={classes.img} image={imageUrl} />  
+      <CardActions>
+        <Button size="small">BUY NOW</Button>
+      </CardActions>
       <CardContent>
         <Typography variant="body2" component="p" >
           {description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">BUY NOW</Button>
-      </CardActions>
     </Card>
     </Grid>
   );
