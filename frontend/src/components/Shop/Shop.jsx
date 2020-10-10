@@ -4,21 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Content from "../Content/Content";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-=======
 import { useState } from "react";
->>>>>>> new_feat
 import Grid from "@material-ui/core/Grid";
 import { findItem } from "../../redux/actions/itemsActions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CardMedia from "@material-ui/core/CardMedia";
-<<<<<<< HEAD
-
-=======
->>>>>>> new_feat
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,13 +30,10 @@ const SaleItems = (props) => {
   const [values, setValues] = useState("");
   const [open, setOpen] = useState(false);
 
-<<<<<<< HEAD
-=======
   if (window.location.href.substr(-2) !== "?r") {
     window.location = window.location.href + "?r";
   }
 
->>>>>>> new_feat
   const handleLoginToggle = () => {
     setOpen(!open);
   };
@@ -57,12 +46,8 @@ const SaleItems = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.searchId(values);
-<<<<<<< HEAD
-    handleLoginToggle()
-=======
     handleLoginToggle();
 
->>>>>>> new_feat
   };
   const classes = useStyles();
   const { id ,  user_name,  title,  description ,  URL ,price,  forSale,  soldTo } = props.specId;
@@ -119,18 +104,10 @@ console.log( "ID number :"+ id ,"seller :"+  user_name, "title :"+ title, "descr
               onChange={handleInputChange}
             />
             <Button
-<<<<<<< HEAD
-              color="primary"
-              type="submit"
-              onClick={handleSubmit}
-              variant="outlined"
-              size="small"
-=======
               className={classes.button}
               type="submit"
               onClick={handleSubmit}
               variant="outlined"
->>>>>>> new_feat
             >
               Search
             </Button>
@@ -141,26 +118,8 @@ console.log( "ID number :"+ id ,"seller :"+  user_name, "title :"+ title, "descr
         <DialogTitle id="form-dialog-title">
           Information about the requested item:{" "}
         </DialogTitle>
-<<<<<<< HEAD
-        <Grid container direction="row" justify="center" alignContent="center"  >
-        <Grid>
-        <CardMedia  component="img"  style={{ maxWidth: "150px", borderRadius: "10px" }}  image={URL}/>
-        </Grid>
-        <Grid>
-        <Typography align="center" variant="h4" >{ "Title :"+ title}</Typography>
-        </Grid>
-
-        </Grid>
-        <Typography align="center" variant="h6" >
-        { `ID number : ${id} , SELLER :  ${user_name} `}</Typography>
-        <Typography align="center" >{"DESCRIPTION :"+ description }</Typography>
-        <Typography align="right" >{ `PRICE : ${price} $, Sold to : ${soldTo}` }</Typography>
-      </Dialog>
-
-=======
         {status}
       </Dialog>
->>>>>>> new_feat
       <Content />
     </div>
   );
@@ -176,9 +135,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-<<<<<<< HEAD
-export default connect( mapStateToProps , mapDispatchToProps)(SaleItems);
-=======
 const mapStateToProps = (state) => {
   return {
     specId: state.items.spec_id,
@@ -192,4 +148,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleItems);
->>>>>>> new_feat

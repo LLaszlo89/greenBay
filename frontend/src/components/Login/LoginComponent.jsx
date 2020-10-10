@@ -10,10 +10,6 @@ import { downloadItems } from "../../redux/actions/itemsActions";
 import ApiReq from "../../apiRequest";
 import { makeStyles } from "@material-ui/core/styles";
 
-<<<<<<< HEAD
-import  ApiReq  from "../../apiRequest";
-const apiReq = new ApiReq()
-=======
 const useStyles = makeStyles({
   button: {
     background: "linear-gradient(45deg, #52b202 10%, #91ff35 90%)",
@@ -27,7 +23,6 @@ const useStyles = makeStyles({
 });
 
 const apiReq = new ApiReq();
->>>>>>> new_feat
 
 const Login = (props) => {
   const classes = useStyles();
@@ -53,29 +48,18 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
-<<<<<<< HEAD
-
-    const data = await apiReq.sendHttpRequest(  "POST",  `http://localhost:3000/api/session`,  values );
-=======
     const data = await apiReq.sendHttpRequest(
       "POST",
       `http://localhost:3000/api/session`,
       values
     );
->>>>>>> new_feat
     if (data.message) {
       setErrorMessage(data.message);
       setError(true);
     } else {
-<<<<<<< HEAD
-      props.download(data)
-      props.history.push("/shop")
-    }   
-=======
       props.download(data);
       props.history.push("/shop");
     }
->>>>>>> new_feat
   };
 
   return (

@@ -16,11 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <PrivateRoute exact path="/shop" component={Shop} to="/" />
-<<<<<<< HEAD
-          <PrivateRoute exact path="/sale" component={SaleItems} to="/" />
-=======
           <PrivateRoute exact path="/create" component={SaleItems} to="/" />
->>>>>>> new_feat
           <Route exact path="*" component={NoMatch} />
         </Switch>
       </div>

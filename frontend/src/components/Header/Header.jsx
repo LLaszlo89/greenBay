@@ -4,22 +4,6 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
-<<<<<<< HEAD
-
-const Header = () => {
-  const name = localStorage.getItem("username");
-  const picture = localStorage.getItem("picture");
-  const cash = localStorage.getItem("cash_balance");
-  
-  const handelLogout = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
-
-  const isLoggedIn = name ? (
-    <div>
-      <AppBar position="static">
-=======
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -64,18 +48,12 @@ const Header = (props) => {
   const isLoggedIn = name ? (
     <div>
       <AppBar position="static" className={classes.root}>
->>>>>>> new_feat
         <Toolbar>
           <Grid container spacing={1} justify="space-between">
             <Grid item container direction="row" alignContent="center">
               <CardMedia
-<<<<<<< HEAD
-                component="img"
-                style={{ maxWidth: "50px", borderRadius: "10px" }}
-=======
                 className={classes.img}
                 component="img"
->>>>>>> new_feat
                 image={picture}
               />
               <Grid item>
@@ -85,49 +63,29 @@ const Header = (props) => {
               <Grid item></Grid>
             </Grid>
           </Grid>
-<<<<<<< HEAD
-
-          <Button
-            style={{ color: "white" }}
-=======
           <NavLink className={classes.link} to="/create"> Sale you item </NavLink>
 
           <Button
             className={classes.button}
->>>>>>> new_feat
             onClick={() => {
               handelLogout();
             }}
           >
-<<<<<<< HEAD
-            Logout
-=======
             {" "}
             Logout{" "}
->>>>>>> new_feat
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   ) : (
     <div>
-<<<<<<< HEAD
-      <AppBar position="static">
-        <Toolbar>
-        </Toolbar>
-=======
       <AppBar className={classes.root} position="static">
         <Toolbar></Toolbar>
->>>>>>> new_feat
       </AppBar>
     </div>
   );
 
-<<<<<<< HEAD
-  return <div>{ isLoggedIn }</div>;
-=======
   return <div>{isLoggedIn}</div>;
->>>>>>> new_feat
 };
 
 export default Header;
