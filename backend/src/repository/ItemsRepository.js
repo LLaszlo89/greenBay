@@ -10,6 +10,7 @@ export default class ItemsRepository {
     return await db.query("SELECT * FROM items WHERE id = ?",  [id]  );
   }
   async saveNewItem({ user_name, title, description, URL, price }) {
+
     return await db.query(
       "INSERT INTO items (user_name, title, description, URL, price )VALUES(?,?,?,?,?)",
       [user_name, title, description, URL, price ]

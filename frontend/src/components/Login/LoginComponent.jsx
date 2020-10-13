@@ -6,7 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-import { downloadItems } from "../../redux/actions/itemsActions";
+import { setLocalStorage } from "../../redux/actions/usersAction";
 import ApiReq from "../../apiRequest";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,7 +21,6 @@ const useStyles = makeStyles({
     color: "#52b202"
 }
 });
-
 const apiReq = new ApiReq();
 
 const Login = (props) => {
@@ -39,7 +38,7 @@ const Login = (props) => {
   const handleLoginToggle = () => {
     setOpen(!open);
   };
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => {  
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -48,16 +47,12 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
-    const data = await apiReq.sendHttpRequest(
-      "POST",
-      `http://localhost:3000/api/session`,
-      values
-    );
+    const data = await apiReq.sendHttpRequest( "POST", `http://localhost:3000/api/session`, values);
     if (data.message) {
       setErrorMessage(data.message);
       setError(true);
     } else {
-      props.download(data);
+      props.setUser(data);
       props.history.push("/shop");
     }
   };
@@ -90,7 +85,7 @@ const Login = (props) => {
             label="Name"
             InputLabelProps={{className: classes.floatingLabelFocusStyle}}
             floatingLabelFocusStyle= {{className: classes.floatingLabelFocusStyle}}
-            name="username" // Without it will not update state!!!!!!!!!!!
+            name="username" 
             value={values.name}
             onChange={handleInputChange}
             margin="normal"
@@ -127,7 +122,7 @@ const Login = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    download: (data) => dispatch(downloadItems(data)),
+    setUser: (data) => dispatch(setLocalStorage(data))
   };
 };
 

@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Header = (props) => {
+const Header = () => {
   const classes = useStyles();
 
   const name = localStorage.getItem("username");

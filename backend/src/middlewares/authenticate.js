@@ -1,5 +1,3 @@
-//import Joi from 'joi';
-const Joi = require('joi');
 
 export class AuthenticateMiddleware {
   constructor({ sessionService }) {
@@ -14,18 +12,7 @@ export class AuthenticateMiddleware {
       req.user = user;
       next();
     } catch (error) {
-      res.status(401).json({ message: `Access Denied due to invalid token` });
+      res.status(401).json({ message: `Access Denied due to invalid token` , error });
     }
   }
 }
-
-
-/* fetch('/user/data', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer' + authToken
-  }
-})
-.then(res => res.json())
-.then(data => { console.log(data) })
-.catch(err => { console.log(err) }) */

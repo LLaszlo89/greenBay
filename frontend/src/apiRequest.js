@@ -1,5 +1,7 @@
 export default class ApiReq {
+  // session / reg / get /items /
   constructor() {}
+
   async sendHttpRequest(method, url, data) {
     try {
       const response = await fetch(url, {
@@ -14,8 +16,11 @@ export default class ApiReq {
     }
   }
 
-  async setHeaderToken(method, url, token) {
-    try {
+  // postItem  , getitem/:id  , putitems
+
+  async setHeaderToken(method, url, data = null, token) {
+
+    if ( method === "GET" ) {
       const response = await fetch(url, {
         method: method,
         headers: new Headers({
@@ -24,9 +29,16 @@ export default class ApiReq {
         }),
       });
       return await response.json();
-    } catch (error) {
-      console.log(error);
-      throw error;
+    } else {
+      const response = await fetch(url, {
+        method: method,
+        body: JSON.stringify(data),
+        headers: new Headers({
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }),
+      });
+      return await response.json();
     }
   }
 }

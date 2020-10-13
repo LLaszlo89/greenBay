@@ -1,8 +1,8 @@
- import {LOGIN_SUCCESS , LOGIN_USER } from '../actions/actionTypes'
+ import { LOGIN_SUCCESS , LOGIN_USER , USER_LOADED } from '../actions/actionTypes'
  const initialState = {
-  isAuthenticated: null,
-  user: localStorage.getItem('user'),
-
+  username: "",
+  cash:null,
+  pic:""
 };
 
 export default function (state = initialState, action) {
@@ -13,12 +13,11 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
       };
 
-/*     case USER_LOADED:
+     case USER_LOADED:
+       console.log("This is the action in the user red" , action.payload )
       return {
         ...state,
-        isLoading: false,
-        user: action.payload,
-      };  */
+      };  
 
     case LOGIN_SUCCESS:
       localStorage.setItem('token', action.payload.token);

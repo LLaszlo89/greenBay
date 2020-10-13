@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import ApiReq from "../../apiRequest";
+import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+const apiReq = new ApiReq();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,22 +17,67 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
+  button: {
+    color: "#52b202",
+    fontFamily: "georgia",
+  },
+  link: {
+    textDecoration: "none",
+    fontFamily: "georgia",
+    fontSize: "20px",
+    color: "#006400",
+    margin : "15px",
+    marginTop:"10px",
+    paddingTop:"5px"
+  },
 }));
 
-
 const SaleItems = () => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [price, setPrice] = useState(null);
-  const [description, setDescription] = useState("");
   const classes = useStyles();
+  const history = useHistory();
 
-  const handelInput=()=>{
-    
-  }
+  const initialState = {
+    title: "",
+    URL: "",
+    price: null,
+    description: "",
+  };
+
+  const [values, setValues] = useState(initialState);
+  const [err, setErr] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  const handlerSubmitForm = async (e) => {
+    e.preventDefault();
+    const { title, URL, price, description } = values;
+
+    if (!title || !URL || !price || !description) {
+      setErr("Some info is missing! Please check again.");
+    } else {
+      try {
+        const currentUser = localStorage.getItem("username");
+        const token = localStorage.getItem("token");
+        const reqValues = values;
+        reqValues.user_name = currentUser; 
+        await apiReq.setHeaderToken( "POST",`http://localhost:3000/api/items`, values, token);
+        history.push("/shop");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
+      <NavLink className={classes.link} to="/shop">
+        Go back to the shop
+      </NavLink>
       <div>
         <Grid
           container
@@ -35,6 +86,9 @@ const SaleItems = () => {
           justify="center"
           alignItems="center"
         >
+          <Typography color="error" variant="h5" align="center">
+            {err}
+          </Typography>
           <Grid item>
             <TextField
               id="outlined-title-input"
@@ -42,6 +96,10 @@ const SaleItems = () => {
               type="title"
               autoComplete="current-title"
               variant="outlined"
+              name="title"
+              value={values.title}
+              onChange={handleInputChange}
+              required
             />
           </Grid>
           <Grid item>
@@ -51,6 +109,10 @@ const SaleItems = () => {
               type="url"
               autoComplete="current-url"
               variant="outlined"
+              name="URL"
+              value={values.URL}
+              onChange={handleInputChange}
+              required
             />
           </Grid>
           <Grid item>
@@ -59,6 +121,10 @@ const SaleItems = () => {
               label="Price"
               type="price"
               variant="outlined"
+              name="price"
+              value={values.price}
+              onChange={handleInputChange}
+              required
             />
           </Grid>
           <TextField
@@ -67,8 +133,16 @@ const SaleItems = () => {
             type="description"
             autoComplete="current-description"
             variant="outlined"
+            name="description"
+            value={values.description}
+            onChange={handleInputChange}
+            required
           />
-          <Button variant="contained" color="primary">
+          <Button
+            variant="outlined"
+            onClick={handlerSubmitForm}
+            className={classes.button}
+          >
             Save item
           </Button>
         </Grid>
