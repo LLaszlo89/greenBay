@@ -45,7 +45,7 @@ const Header = (props) => {
 
   const isLoggedIn = username ? (
     <div>
-      <AppBar position="static" className={classes.root}>
+      <AppBar data-test="headersComponent" position="static" className={classes.root}>
         <Toolbar>
           <Grid container spacing={1} justify="space-between">
             <Grid item container direction="row" alignContent="center">
@@ -78,7 +78,7 @@ const Header = (props) => {
     </div>
   ) : (
     <div>
-      <AppBar className={classes.root} position="static">
+      <AppBar data-test="headersComponentOnEmpty" className={classes.root} position="static">
         <Toolbar></Toolbar>
       </AppBar>
     </div>

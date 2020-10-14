@@ -34,13 +34,13 @@ export default function (state = initialState, action) {
         ...state,
         err_message: action.payload,
       }; 
+     case ITEM_SOLD:
+       console.log("T item sold reducer" , action.payload)
 
-      case ITEM_SOLD:
-        console.log("item sold was called form reducer" , action.payload )
-        return {
-          ...state,
-          new_price: action.payload
-        };
+      return {
+        ...state,
+      }
+
     default:
       return state;
   }

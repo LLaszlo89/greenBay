@@ -2,7 +2,7 @@ import {
   DOWNLOAD_ALL_ITEMS,
   SHOW_ITEM_AFTER_ID,
   ITEM_NOT_FOUND,
-  ITEM_SOLD,
+  NEW_BALANCE,
   ERROR_MESSAGE_DB,
 } from "./actionTypes";
 
@@ -29,27 +29,24 @@ export const findItem = (id) => {
   };
 };
 
-export const itemSold = async (item_id) => {
+export const itemSold = (item_id) => {
+  return async (dispatch) => {       
   const token = localStorage.getItem("token");
   const data = {
     name: localStorage.getItem("username"),
     id: item_id,
   };
-
+  
   const response = await apiReq.setHeaderToken("PUT", url, data, token);
-
+  
   if (!response.cash) {
-    console.log(response.message);
+    console.log("No many response :::::" , response.message);
     console.log(response.cash);
   } else {
     console.log(response.message);
     localStorage.setItem("cash_balance", response.cash);
-    window.location.reload()      /* Reload but slllllooooowwwwww */
+    dispatch({ type: NEW_BALANCE , payload: response.cash });
   }
-
-  return (dispatch) => {
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$");
-    dispatch({ type: ITEM_SOLD, payload: response.cash });
     dispatch({ type: ERROR_MESSAGE_DB, payload: response.message });
   };
 };

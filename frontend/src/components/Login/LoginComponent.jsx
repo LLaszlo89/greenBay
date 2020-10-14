@@ -47,6 +47,7 @@ const Login = (props) => {
   };
 
   const onSubmit = async () => {
+
     const data = await apiReq.sendHttpRequest( "POST", `http://localhost:3000/api/session`, values);
     if (data.message) {
       setErrorMessage(data.message);
@@ -54,7 +55,7 @@ const Login = (props) => {
     } else {
       props.setUser(data);
       props.history.push("/shop");
-      window.location.reload()
+     // window.location.reload()
     }
   };
 

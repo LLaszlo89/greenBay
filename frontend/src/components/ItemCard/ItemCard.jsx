@@ -9,6 +9,7 @@ import { CardMedia } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { itemSold } from "../../redux/actions/itemsActions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: { height: "300px", width: "350px" },
@@ -22,11 +23,7 @@ const useStyles = makeStyles(() => ({
 
 const ItemCard = (props) => {
   const classes = useStyles();
-  const { id, title, price, description, URL } = props;
-
-  const handelBuy = (id) => {
-   itemSold(id);    
-  };
+  const { id, title, price, description, URL , buyId } = props;
   
 
   return (
@@ -39,7 +36,7 @@ const ItemCard = (props) => {
           <Button
             className={classes.button}
             onClick={() => {
-              handelBuy(id);
+              buyId(id);
             }}
             size="small"
           >
@@ -54,4 +51,10 @@ const ItemCard = (props) => {
   );
 };
 
-export default ItemCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    buyId: (id) => dispatch(itemSold(id)),
+  };
+};
+
+export default connect( null , mapDispatchToProps)(ItemCard);
