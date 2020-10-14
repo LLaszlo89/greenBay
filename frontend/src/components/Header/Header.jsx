@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -23,47 +24,45 @@ const useStyles = makeStyles({
     borderRadius: "10px",
     marginTop: "10px",
   },
-  link:{
+  link: {
     textDecoration: "none",
-    color :"white" , 
-    fontSize:"20px",
+    color: "white",
+    fontSize: "20px",
     textAlign: "center",
     borderStyle: "solid",
-    marginRight : "20px"
-  }
+    marginRight: "20px",
+  },
 });
 
 const Header = () => {
   const classes = useStyles();
-
-  const name = localStorage.getItem("username");
-  const picture = localStorage.getItem("picture");
-  const cash = localStorage.getItem("cash_balance");
+  const { username, cash, pic } = props.user;
 
   const handelLogout = () => {
     localStorage.clear();
     window.location.reload();
   };
 
-  const isLoggedIn = name ? (
+  const isLoggedIn = username ? (
     <div>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Grid container spacing={1} justify="space-between">
             <Grid item container direction="row" alignContent="center">
-              <CardMedia
-                className={classes.img}
-                component="img"
-                image={picture}
-              />
+              <CardMedia className={classes.img} component="img" image={pic} />
               <Grid item>
-                <Typography variant="h6">{name}</Typography>
-                <Typography variant="h6">{cash && cash + "$"} </Typography>
+                <Typography variant="h6">{username}</Typography>
+                <Typography variant="h6">
+                  {cash && cash + " green_$"}{" "}
+                </Typography>
               </Grid>
               <Grid item></Grid>
             </Grid>
           </Grid>
-          <NavLink className={classes.link} to="/create"> Sale you item </NavLink>
+          <NavLink className={classes.link} to="/create">
+            {" "}
+            Sale you item{" "}
+          </NavLink>
 
           <Button
             className={classes.button}
@@ -88,4 +87,10 @@ const Header = () => {
   return <div>{isLoggedIn}</div>;
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.users,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

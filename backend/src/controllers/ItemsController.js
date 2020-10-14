@@ -53,13 +53,14 @@ export class ItemsController {
         const new_balance = user_cash.results[0].cash_balance - isForSale.results[0].price;
 
         if (new_balance <= 0) {
-          res.status(400).json({ message: " Balance is not enough" });
+          res.status(400).json({ message: ` Your balance is not enough to purchase the item ` });
         } else {
            await this.userRepository.updateUser( name, new_balance );
            await this.itemsRepository.updateItemStatus( id, name );
         }
         res.status(200).json({
           message: `Thank you for your purchase! You new balance is : ${new_balance} green_$ `,
+          cash:new_balance
         });
       }
     } catch (error) {

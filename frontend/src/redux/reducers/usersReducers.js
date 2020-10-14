@@ -1,17 +1,35 @@
+<<<<<<< HEAD
  import { LOGIN_SUCCESS , LOGIN_USER , USER_LOADED } from '../actions/actionTypes'
  const initialState = {
   username: "",
   cash:null,
   pic:""
+=======
+import { USER_LOADED , ERROR_MESSAGE_DB } from "../actions/actionTypes";
+
+const initialState = {
+  username: localStorage.getItem('username') ,
+  cash: localStorage.getItem('cash_balance'),
+  pic: localStorage.getItem('picture'),
+  error_message:""
+>>>>>>> new
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-     case LOGIN_USER:
+    
+    case USER_LOADED:
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("cash_balance", action.payload.cash_balance);
+      localStorage.setItem("picture", action.payload.picture);
+      localStorage.setItem("username", action.payload.name);
       return {
         ...state,
-        isAuthenticated: true,
+        username: action.payload.name,
+        cash: action.payload.cash_balance,
+        pic: action.payload.picture,
       };
+<<<<<<< HEAD
 
      case USER_LOADED:
        console.log("This is the action in the user red" , action.payload )
@@ -23,29 +41,16 @@ export default function (state = initialState, action) {
       localStorage.setItem('token', action.payload.token);
       localStorage.setItem('user', action.payload.user);
       localStorage.setItem('cash_balance', action.payload.cash_balance);
+=======
+    case ERROR_MESSAGE_DB:
+      console.log(action.type,"**********************--")
+>>>>>>> new
       return {
         ...state,
-        ...action.payload,
+        error_message: action.payload
       };
-/* 
-    case AUTH_ERROR:
-    case LOGIN_FAIL:
-    case LOGOUT_SUCCESS:
-    case REGISTER_FAIL:
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      localStorage.removeItem('admin');
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        isLoading: false,
-        isAdmin: false,
-        user: null,
-      };
- */
+
     default:
       return state;
   }
 }
- 

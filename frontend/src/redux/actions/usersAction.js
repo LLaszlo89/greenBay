@@ -1,4 +1,5 @@
 import { USER_LOADED } from "./actionTypes";
+<<<<<<< HEAD
 import sendHttpRequest from '../../apiRequest';
 const BACKEND_URL = 'http://localhost:3000';
 
@@ -30,3 +31,11 @@ export const setLocalStorage = (data) => {
     });
   }
 }; */
+=======
+
+export const setUser = (data) => {
+  return (dispatch) => {
+    dispatch({ type: USER_LOADED, payload: data });
+  };
+};
+>>>>>>> new

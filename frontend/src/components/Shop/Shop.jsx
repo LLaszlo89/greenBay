@@ -9,7 +9,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import CardMedia from "@material-ui/core/CardMedia";
 import Content from "../Content/Content";
 import { findItem } from "../../redux/actions/itemsActions";
+<<<<<<< HEAD
 import { cancelErrMessage , cancelSpecId } from "../../redux/actions/itemsActions";
+=======
+>>>>>>> new
 import { connect } from "react-redux";
 
 import {CANCEL_ERR_MESSAGE} from '../../redux/actions/actionTypes'
@@ -33,6 +36,7 @@ const SaleItems = (props) => {
   const [values, setValues] = useState("");
   const [open, setOpen] = useState(false);
 
+<<<<<<< HEAD
   if (window.location.href.substr(-2) !== "?r") {
     window.location = window.location.href + "?r";    /* ?!!??!! */
   }
@@ -50,6 +54,13 @@ const SaleItems = (props) => {
       console.log(props.notFound , "GOOD*") 
     }
   }
+=======
+  const handleLoginToggle = () => {
+    setOpen(!open);
+    {props.notFound.message && props.cancel()}
+  };
+
+>>>>>>> new
   
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -65,6 +76,10 @@ const SaleItems = (props) => {
 
   const classes = useStyles();
 
+<<<<<<< HEAD
+=======
+  const sellerStatus =  props.specId.soldTo ? "Sold to :" + props.specId.soldTo : " Still Available ! "
+>>>>>>> new
   const status = props.notFound  ? (
     <div>
       <Grid container direction="row" justify="center" alignContent="center">
@@ -102,7 +117,11 @@ const SaleItems = (props) => {
       <Typography align="center">
         {"DESCRIPTION :" + props.specId.description}
       </Typography>
+<<<<<<< HEAD
       <Typography align="right">{`PRICE : ${props.specId.price} $, Sold to : ${props.specId.soldTo}`}</Typography>
+=======
+      <Typography style={{ marginRight:"25px"}} align="right">{`PRICE : ${props.specId.price} $, ${sellerStatus}`}</Typography>
+>>>>>>> new
     </div>
   );
 

@@ -26,15 +26,22 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "georgia",
     fontSize: "20px",
     color: "#006400",
+<<<<<<< HEAD
     margin : "15px",
     marginTop:"10px",
     paddingTop:"5px"
+=======
+    margin: "15px",
+    marginTop: "10px",
+    paddingTop: "5px",
+>>>>>>> new
   },
 }));
 
 const SaleItems = () => {
   const classes = useStyles();
   const history = useHistory();
+<<<<<<< HEAD
 
   const initialState = {
     title: "",
@@ -43,6 +50,16 @@ const SaleItems = () => {
     description: "",
   };
 
+=======
+
+  const initialState = {
+    title: "",
+    URL: "",
+    price: null,
+    description: "",
+  };
+
+>>>>>>> new
   const [values, setValues] = useState(initialState);
   const [err, setErr] = useState("");
 
@@ -53,19 +70,46 @@ const SaleItems = () => {
       [name]: value,
     });
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> new
   const handlerSubmitForm = async (e) => {
     e.preventDefault();
     const { title, URL, price, description } = values;
 
+<<<<<<< HEAD
     if (!title || !URL || !price || !description) {
       setErr("Some info is missing! Please check again.");
+=======
+    if (!title) {
+      setErr("All fields are required! Please fill the Title field.");
+    } else if (!URL) {
+      setErr("All fields are required! Please fill the URL field.");
+    } else if (!price) {
+      setErr("All fields are required! Please fill the Price field.");
+    } else if (Number(price) <= 0) {
+      setErr(" Price must be greater than 0 ! ");
+    } else if (!description) {
+      setErr("All fields are required! Please fill the description field.");
+>>>>>>> new
     } else {
       try {
         const currentUser = localStorage.getItem("username");
         const token = localStorage.getItem("token");
         const reqValues = values;
+<<<<<<< HEAD
         reqValues.user_name = currentUser; 
         await apiReq.setHeaderToken( "POST",`http://localhost:3000/api/items`, values, token);
+=======
+        reqValues.user_name = currentUser;
+        await apiReq.setHeaderToken(
+          "POST",
+          `http://localhost:3000/api/items`,
+          values,
+          token
+        );
+>>>>>>> new
         history.push("/shop");
       } catch (error) {
         console.log(error);
