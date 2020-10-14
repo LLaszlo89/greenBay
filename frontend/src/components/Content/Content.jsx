@@ -12,7 +12,6 @@ const Content = (props) => {
   }, [download_items]);
 
   const ItemsCards = (item) => {
-
     return (
       <Grid key={item.id} item xs={12} sm={4}>
         <ItemCard {...item} />
