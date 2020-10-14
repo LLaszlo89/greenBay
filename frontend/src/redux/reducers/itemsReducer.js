@@ -3,7 +3,7 @@ import {
   SHOW_ITEM_AFTER_ID,
   ITEM_NOT_FOUND,
   CANCEL_ERR_MESSAGE,
-  ITEM_SOLD , TEST
+  ITEM_SOLD 
 } from "../actions/actionTypes";
 
 const initialState = {
