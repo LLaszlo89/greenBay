@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React, { useEffect } from 'react';
+>>>>>>> new
 import { Typography } from '@material-ui/core';
 
 const NoMatch = () => {

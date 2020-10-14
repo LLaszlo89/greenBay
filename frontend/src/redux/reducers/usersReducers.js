@@ -21,7 +21,6 @@ export default function (state = initialState, action) {
         cash: action.payload.cash_balance,
         pic: action.payload.picture,
       };
-      
     case ERROR_MESSAGE_DB:
       console.log(action.type,"**********************--")
       return {

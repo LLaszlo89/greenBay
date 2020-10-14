@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
@@ -9,7 +9,6 @@ import { CardMedia } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { itemSold } from "../../redux/actions/itemsActions";
-import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: { height: "300px", width: "350px" },
@@ -23,7 +22,11 @@ const useStyles = makeStyles(() => ({
 
 const ItemCard = (props) => {
   const classes = useStyles();
-  const { id, title, price, description, URL , buyId } = props;
+  const { id, title, price, description, URL } = props;
+
+  const handelBuy = (id) => {
+   itemSold(id);    
+  };
   
 
   return (
@@ -36,7 +39,7 @@ const ItemCard = (props) => {
           <Button
             className={classes.button}
             onClick={() => {
-              buyId(id);
+              handelBuy(id);
             }}
             size="small"
           >

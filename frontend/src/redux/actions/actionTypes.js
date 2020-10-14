@@ -5,7 +5,7 @@ export const ADD_NEW_ITEM = "ADD_NEW_ITEM";
 export const ITEM_NOT_FOUND = "ITEM_NOT_FOUND";
 export const USER_LOADED = "USER_LOADED";
 export const ERROR_MESSAGE_DB = "ERROR_MESSAGE_DB";
-export const NEW_BALANCE = "NEW_BALANCE";
+export const TEST = "TEST";
 
 export const CANCEL_ERR_MESSAGE = "CANCEL_ERR_MESSAGE";
 export const CANCEL_SPEC_ID = "CANCEL_SPEC_ID";

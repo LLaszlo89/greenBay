@@ -3,7 +3,7 @@ import {
   SHOW_ITEM_AFTER_ID,
   ITEM_NOT_FOUND,
   CANCEL_ERR_MESSAGE,
-  ITEM_SOLD 
+  ITEM_SOLD , TEST
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -34,13 +34,13 @@ export default function (state = initialState, action) {
         ...state,
         err_message: action.payload,
       }; 
-     case ITEM_SOLD:
-       console.log("T item sold reducer" , action.payload)
 
-      return {
-        ...state,
-      }
-
+      case ITEM_SOLD:
+        console.log("item sold was called form reducer" , action.payload )
+        return {
+          ...state,
+          new_price: action.payload
+        };
     default:
       return state;
   }
