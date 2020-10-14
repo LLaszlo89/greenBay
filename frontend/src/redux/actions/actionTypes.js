@@ -4,11 +4,8 @@ export const HIDE_SOLD_ITEM = "HIDE_SOLD_ITEM";
 export const ADD_NEW_ITEM = "ADD_NEW_ITEM";
 export const ITEM_NOT_FOUND = "ITEM_NOT_FOUND";
 export const USER_LOADED = "USER_LOADED";
-<<<<<<< HEAD
-=======
 export const ERROR_MESSAGE_DB = "ERROR_MESSAGE_DB";
 export const TEST = "TEST";
->>>>>>> new
 
 export const CANCEL_ERR_MESSAGE = "CANCEL_ERR_MESSAGE";
 export const CANCEL_SPEC_ID = "CANCEL_SPEC_ID";

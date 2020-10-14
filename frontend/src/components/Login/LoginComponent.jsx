@@ -6,11 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-<<<<<<< HEAD
-import { setLocalStorage } from "../../redux/actions/usersAction";
-=======
 import { setUser } from "../../redux/actions/usersAction";
->>>>>>> new
 import ApiReq from "../../apiRequest";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -127,11 +123,7 @@ const Login = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-<<<<<<< HEAD
-    setUser: (data) => dispatch(setLocalStorage(data))
-=======
     setUser: (data) => dispatch(setUser(data))
->>>>>>> new
   };
 };
 

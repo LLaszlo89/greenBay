@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   const { username, cash, pic } = props.user;
 

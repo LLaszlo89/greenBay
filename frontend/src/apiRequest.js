@@ -1,6 +1,4 @@
 export default class ApiReq {
-  // session / reg / get /items /
-  constructor() {}
 
   async sendHttpRequest(method, url, data) {
     try {
