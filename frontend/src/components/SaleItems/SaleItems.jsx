@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "georgia",
     fontSize: "20px",
     color: "#006400",
-    margin: "15px",
-    marginTop: "10px",
-    paddingTop: "5px",
+    margin : "15px",
+    marginTop:"10px",
+    paddingTop:"5px"
   },
 }));
 
@@ -72,13 +72,8 @@ const SaleItems = () => {
         const currentUser = localStorage.getItem("username");
         const token = localStorage.getItem("token");
         const reqValues = values;
-        reqValues.user_name = currentUser;
-        await apiReq.setHeaderToken(
-          "POST",
-          `http://localhost:3000/api/items`,
-          values,
-          token
-        );
+        reqValues.user_name = currentUser; 
+        await apiReq.setHeaderToken( "POST",`http://localhost:3000/api/items`, values, token);
         history.push("/shop");
       } catch (error) {
         console.log(error);
