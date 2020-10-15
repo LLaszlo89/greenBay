@@ -10,7 +10,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Content from "../Content/Content";
 import { findItem } from "../../redux/actions/itemsActions";
 import { connect } from "react-redux";
-
 import {CANCEL_ERR_MESSAGE} from '../../redux/actions/actionTypes'
 
 
@@ -136,7 +135,6 @@ const mapStateToProps = (state) => {
   return {
     specId: state.items.spec_id,
     notFound: state.items.err_message,
-    user : state.users,
     purchase_message: state.items.sold_message
   };
 };

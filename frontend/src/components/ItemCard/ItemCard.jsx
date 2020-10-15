@@ -9,16 +9,20 @@ import { CardMedia } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { itemSold } from "../../redux/actions/itemsActions";
-import { connect } from 'react-redux'
-
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
-  root: { height: "300px", width: "350px" , margin: "15px" , background :"linear-gradient(45deg,#D6FFD4  30%, #A8FF5F 70%)"  },
+  root: {
+    height: "300px",
+    width: "350px",
+    margin: "15px",
+    background: "linear-gradient(45deg,#D6FFD4  30%, #A8FF5F 70%)",
+  },
   img: { height: "100px" },
   button: {
     fontFamily: "georgia",
-    fontSize: "20px" ,
-    margin:0
+    fontSize: "20px",
+    margin: 0,
   },
 }));
 
@@ -27,12 +31,11 @@ const ItemCard = (props) => {
   const { id, title, price, description, URL } = props;
 
   const handelBuy = (id) => {
-    props.buyId(id);    
+    props.buyId(id);
   };
-  
 
   return (
-    <Grid container justify="space-around" alignItems="center" >
+    <Grid container justify="space-around" alignItems="center">
       <Card className={classes.root}>
         <CardHeader title={title} subheader={price + " green_$"} />
         <CardMedia className={classes.img} image={URL} />
@@ -48,7 +51,7 @@ const ItemCard = (props) => {
           </Button>
         </CardActions>
         <CardContent>
-            <Typography>{description}</Typography>
+          <Typography>{description}</Typography>
         </CardContent>
       </Card>
     </Grid>
@@ -61,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect( null , mapDispatchToProps)(ItemCard);
+export default connect(null, mapDispatchToProps)(ItemCard);

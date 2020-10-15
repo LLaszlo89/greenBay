@@ -54,7 +54,7 @@ const Login = (props) => {
   };
 
   return (
-    <div style={{ backgroundImage: "https://uploads-ssl.webflow.com/598435743262c800013158eb/598c28e3153f320001974cdf_green_fox_logo_full.svg"}} >
+    <div>
       <Typography variant="h4" align={"center"} style={{marginTop:'120px'}}  >
         Welcome to the coolest web shop on the planet earth!
       </Typography>
