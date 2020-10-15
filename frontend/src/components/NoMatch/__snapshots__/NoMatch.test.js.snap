@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Connect component to redux store  NoMatch Component should render correctly 1`] = `
+<p
+  className="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter"
+>
+  <h1>
+    404 Page Not Found
+  </h1>
+</p>
+`;

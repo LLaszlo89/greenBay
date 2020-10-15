@@ -39,10 +39,7 @@ export class SessionService {
   }
 
   async addNewUser({ name , email ,password , cash_balance , profile_pic}){
-    /* function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-} */
+  
     try {
       const hashed_pass = await this.passwordValidationService.hashedPassword(password)
      return await this.userRepository.saveNewUser(name , email , hashed_pass , cash_balance , profile_pic)

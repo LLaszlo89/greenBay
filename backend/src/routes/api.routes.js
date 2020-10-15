@@ -5,7 +5,6 @@ import { setupDI, container } from "../di-setup";
 
 setupDI();
 
-// Only controllers need to be resolved  ???
 const sessionController = container.resolve("sessionController");
 const itemsController = container.resolve("itemsController");
 const authenticateMiddleware = container.resolve("authenticateMiddleware");

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Connect component to redux store  Header Component should render correctly 1`] = `
+<div>
+  <div>
+    <header
+      className="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary makeStyles-root-1 MuiPaper-elevation4"
+      data-test="headersComponent"
+    >
+      <div
+        className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-justify-xs-space-between"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-content-xs-center"
+          >
+            <img
+              className="MuiCardMedia-root makeStyles-img-3 MuiCardMedia-media MuiCardMedia-img"
+              src="Test"
+            />
+            <div
+              className="MuiGrid-root MuiGrid-item"
+            >
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                Test
+              </h6>
+              <h6
+                className="MuiTypography-root MuiTypography-h6"
+              >
+                2911 green_$
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-item"
+            />
+          </div>
+        </div>
+        <a
+          className="makeStyles-link-4"
+          href="/create"
+          onClick={[Function]}
+        >
+          Sale you item
+        </a>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button-2"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Logout
+          </span>
+        </button>
+      </div>
+    </header>
+  </div>
+</div>
+`;

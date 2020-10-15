@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Header from "./Header";
+import Shop from "./Shop";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
@@ -8,19 +8,31 @@ import configureStore from "redux-mock-store";
 describe("Connect component to redux store ", () => {
   const mockStore = configureStore([]);
 
-  const users = {
-    username: "Test",
-    cash: "2911",
-    pic: "Test",
-    error_message: "",
+  const items = {
+    items: [
+      {
+        id: 1,
+        user_name: "Test",
+        title: "Test",
+        description: "Test",
+        URL: "Test",
+        price: 1,
+        forSale: 1,
+      },
+    ],
+    spec_id :"",
+    err_message:"",
+    sold_message:""
   };
-  const store = mockStore({ users });
 
-  it("Header Component should render correctly", () => {
+
+  const store = mockStore({ items });
+
+  it("Shop Component should render correctly", () => {
     const tree = renderer.create(
       <BrowserRouter>
         <Provider store={store}>
-          <Header />
+          <Shop />
         </Provider>
       </BrowserRouter>
     );

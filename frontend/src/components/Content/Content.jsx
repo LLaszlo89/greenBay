@@ -9,12 +9,11 @@ const Content = ({ download_items, list }) => {
   useEffect(() => {
     download_items();
   }, [download_items]);
-
   return (
     <>
       {list.length > 0 && (
         <Grid container >
-          {list[0].map((item) => (
+          {list.map((item) => (
             <Grid key={item.id} item xs={12} sm={4}>
               <ItemCard {...item} />
             </Grid>

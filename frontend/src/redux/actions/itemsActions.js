@@ -4,7 +4,9 @@ import {
   ITEM_NOT_FOUND,
   ITEM_SOLD,
   ITEM_ERROR_MESSAGE_DB,
-  NEW_CASH_BALANCE
+  NEW_CASH_BALANCE,
+  REMOVE_ITEM,
+  ADD_NEW_ITEM
 } from "./actionTypes";
 
 import ApiReq from "../../apiRequest";
@@ -45,14 +47,33 @@ export const itemSold = (item_id) => {
     };
 
     const response = await apiReq.setHeaderToken("PUT", url, data, token);
-    
+
     console.log(response.message);
 
     if (!response.cash) {
       dispatch({ type: ITEM_ERROR_MESSAGE_DB, payload: response.message });
     } else {
-      dispatch({ type: NEW_CASH_BALANCE ,  payload: response.cash });
-      dispatch({ type: ITEM_SOLD ,  payload: response.message });
+      dispatch({ type: NEW_CASH_BALANCE, payload: response.cash });
+      dispatch({ type: ITEM_SOLD, payload: response.message });
+      dispatch({ type: REMOVE_ITEM, payload: item_id });
     }
+  };
+};
+
+export const addNewItem = ({ title, URL, price, description }) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("token");
+    const user_name = localStorage.getItem("username");
+    const values = { user_name: user_name, title, description, URL, price };
+
+    const resp = await apiReq.setHeaderToken(
+      "POST",
+      `http://localhost:3000/api/items`,
+      values,
+      token
+    );
+
+    console.log("This is the new resp Item action CREATE", resp);
+      dispatch({ type: ADD_NEW_ITEM ,  payload: resp });
   };
 };

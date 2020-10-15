@@ -91,7 +91,6 @@ const SaleItems = (props) => {
       <Typography style={{ marginRight:"25px"}} align="right">{`PRICE : ${props.specId.price} $, ${sellerStatus}`}</Typography>
     </div>
   );
-console.log("This is the mssg in shop after buy" , props.purchase_message)
   return (
     <div>
       <form className={classes.root} noValidate autoComplete="off">

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -63,9 +63,9 @@ const Header = (props) => {
               <Grid item></Grid>
             </Grid>
           </Grid>
-          <NavLink className={classes.link} to="/create">
+          <Link className={classes.link} to="/create">
             Sale you item
-          </NavLink>
+          </Link>
 
           <Button
             className={classes.button}

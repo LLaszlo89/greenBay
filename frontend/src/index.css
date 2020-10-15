@@ -15,6 +15,6 @@ code {
 body {
   background: url(https://uploads-ssl.webflow.com/598435743262c800013158eb/598c28e3153f320001974cdf_green_fox_logo_full.svg);
   background-repeat: no-repeat;
-  background-position-x: -200%;
-  background-position-y: -300%;
+   background-position-x: -200%;
+  background-position-y: -300%; 
 }

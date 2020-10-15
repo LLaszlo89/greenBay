@@ -4,11 +4,10 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import ApiReq from "../../apiRequest";
 import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
-const apiReq = new ApiReq();
+import { addNewItem } from "../../redux/actions/itemsActions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,14 +25,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "georgia",
     fontSize: "20px",
     color: "#006400",
-    margin : "15px",
-    marginTop:"10px",
-    paddingTop:"5px"
-
+    margin: "15px",
+    marginTop: "10px",
+    paddingTop: "5px",
   },
 }));
 
-const SaleItems = () => {
+const SaleItems = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -58,11 +56,14 @@ const SaleItems = () => {
   const handlerSubmitForm = async (e) => {
     e.preventDefault();
     const { title, URL, price, description } = values;
+    const regex = new RegExp(    );
 
     if (!title) {
       setErr("All fields are required! Please fill the Title field.");
     } else if (!URL) {
       setErr("All fields are required! Please fill the URL field.");
+    } else if (!URL.match(regex)) {
+      setErr("Invalid URL");
     } else if (!price) {
       setErr("All fields are required! Please fill the Price field.");
     } else if (Number(price) <= 0) {
@@ -70,17 +71,8 @@ const SaleItems = () => {
     } else if (!description) {
       setErr("All fields are required! Please fill the description field.");
     } else {
-      try {
-        const currentUser = localStorage.getItem("username");
-        const token = localStorage.getItem("token");
-        const reqValues = values;
-        reqValues.user_name = currentUser; 
-        await apiReq.setHeaderToken( "POST",`http://localhost:3000/api/items`, values, token);
-
-        history.push("/shop");
-      } catch (error) {
-        console.log(error);
-      }
+      await props.addNew(values);
+      history.push("/shop");
     }
   };
 
@@ -161,4 +153,11 @@ const SaleItems = () => {
     </form>
   );
 };
-export default SaleItems;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNew: (values) => dispatch(addNewItem(values)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SaleItems);
