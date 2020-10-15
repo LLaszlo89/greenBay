@@ -3,14 +3,15 @@ import {
   SHOW_ITEM_AFTER_ID,
   ITEM_NOT_FOUND,
   CANCEL_ERR_MESSAGE,
-  ITEM_SOLD 
+  ITEM_SOLD,
+  ITEM_ERROR_MESSAGE_DB,
 } from "../actions/actionTypes";
 
 const initialState = {
   items: [],
   spec_id: "",
   err_message: "",
-  new_price: null
+  sold_message: "",
 };
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -18,7 +19,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         items: [...state.items, action.payload],
-      };    
+      };
     case SHOW_ITEM_AFTER_ID:
       return {
         ...state,
@@ -29,18 +30,17 @@ export default function (state = initialState, action) {
         ...state,
         err_message: "",
       };
-     case ITEM_NOT_FOUND:
+    case ITEM_NOT_FOUND:
       return {
         ...state,
         err_message: action.payload,
-      }; 
-
-      case ITEM_SOLD:
-        console.log("item sold was called form reducer" , action.payload )
-        return {
-          ...state,
-          new_price: action.payload
-        };
+      };
+    case ITEM_ERROR_MESSAGE_DB:
+    case ITEM_SOLD:
+      return {
+        ...state,
+        sold_message: action.payload,
+      };
     default:
       return state;
   }

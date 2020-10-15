@@ -23,15 +23,15 @@ router.post("/register", (req, res) => {
   sessionController.createNewUser(req, res);
 });
 
+router.use((req, res, next) =>
+  authenticateMiddleware.authenticate(req, res, next)
+);
 
 router.get("/items", (req, res) => {
   itemsController.getItemsForSale(req, res);
 });
 
 
-router.use((req, res, next) =>
-  authenticateMiddleware.authenticate(req, res, next)
-);
 
 router.post("/items", (req, res) => {
   itemsController.createNewItems(req, res);

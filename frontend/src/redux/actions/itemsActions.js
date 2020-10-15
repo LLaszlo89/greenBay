@@ -3,7 +3,8 @@ import {
   SHOW_ITEM_AFTER_ID,
   ITEM_NOT_FOUND,
   ITEM_SOLD,
-  ERROR_MESSAGE_DB,
+  ITEM_ERROR_MESSAGE_DB,
+  NEW_CASH_BALANCE
 } from "./actionTypes";
 
 import ApiReq from "../../apiRequest";
@@ -11,10 +12,16 @@ const apiReq = new ApiReq();
 
 const url = "http://localhost:3000/api/items";
 
-export const download_items_to_store = () => {
+export const downloadItemsToStore = () => {
   return async (dispatch) => {
-    const allItems = await apiReq.sendHttpRequest("GET", url);
-    dispatch({ type: DOWNLOAD_ALL_ITEMS, payload: allItems });
+    const token = localStorage.getItem("token");
+
+    const allItems = await apiReq.setHeaderToken("GET", url, null, token);
+    if (allItems.message) {
+      dispatch({ type: ITEM_ERROR_MESSAGE_DB, payload: allItems.message });
+    } else {
+      dispatch({ type: DOWNLOAD_ALL_ITEMS, payload: allItems });
+    }
   };
 };
 
@@ -29,27 +36,23 @@ export const findItem = (id) => {
   };
 };
 
-export const itemSold = async (item_id) => {
-  const token = localStorage.getItem("token");
-  const data = {
-    name: localStorage.getItem("username"),
-    id: item_id,
-  };
+export const itemSold = (item_id) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("token");
+    const data = {
+      name: localStorage.getItem("username"),
+      id: item_id,
+    };
 
-  const response = await apiReq.setHeaderToken("PUT", url, data, token);
-
-  if (!response.cash) {
+    const response = await apiReq.setHeaderToken("PUT", url, data, token);
+    
     console.log(response.message);
-    console.log(response.cash);
-  } else {
-    console.log(response.message);
-    localStorage.setItem("cash_balance", response.cash);
-    window.location.reload()      /* Reload but slllllooooowwwwww */
-  }
 
-  return (dispatch) => {
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$");
-    dispatch({ type: ITEM_SOLD, payload: response.cash });
-    dispatch({ type: ERROR_MESSAGE_DB, payload: response.message });
+    if (!response.cash) {
+      dispatch({ type: ITEM_ERROR_MESSAGE_DB, payload: response.message });
+    } else {
+      dispatch({ type: NEW_CASH_BALANCE ,  payload: response.cash });
+      dispatch({ type: ITEM_SOLD ,  payload: response.message });
+    }
   };
 };

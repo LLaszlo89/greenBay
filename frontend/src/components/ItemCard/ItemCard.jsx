@@ -13,12 +13,12 @@ import { connect } from 'react-redux'
 
 
 const useStyles = makeStyles(() => ({
-  root: { height: "300px", width: "350px" },
+  root: { height: "300px", width: "350px" , margin: "15px" , background :"linear-gradient(45deg,#D6FFD4  30%, #A8FF5F 70%)"  },
   img: { height: "100px" },
   button: {
-    color: "#52b202",
     fontFamily: "georgia",
-    padding: 0,
+    fontSize: "20px" ,
+    margin:0
   },
 }));
 
@@ -27,13 +27,12 @@ const ItemCard = (props) => {
   const { id, title, price, description, URL } = props;
 
   const handelBuy = (id) => {
-   itemSold(id);    
+    props.buyId(id);    
   };
   
 
   return (
-    <Grid container justify="space-around" alignItems="center">
-
+    <Grid container justify="space-around" alignItems="center" >
       <Card className={classes.root}>
         <CardHeader title={title} subheader={price + " green_$"} />
         <CardMedia className={classes.img} image={URL} />

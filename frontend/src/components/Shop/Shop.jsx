@@ -44,7 +44,6 @@ const SaleItems = (props) => {
     setValues(value);
   };
   const handleSubmit = (e) => {
-
     e.preventDefault();
     props.searchId(values);
     handleLoginToggle();
@@ -55,7 +54,7 @@ const SaleItems = (props) => {
   const sellerStatus =  props.specId.soldTo ? "Sold to :" + props.specId.soldTo : " Still Available ! "
   const status = props.notFound  ? (
     <div>
-      <Grid container direction="row" justify="center" alignContent="center">
+      <Grid container direction="row" justify="center" alignContent="center" >
         <Grid>
           <Typography align="center" variant="h6" color="error">
             {props.notFound.message}
@@ -93,7 +92,7 @@ const SaleItems = (props) => {
       <Typography style={{ marginRight:"25px"}} align="right">{`PRICE : ${props.specId.price} $, ${sellerStatus}`}</Typography>
     </div>
   );
-
+console.log("This is the mssg in shop after buy" , props.purchase_message)
   return (
     <div>
       <form className={classes.root} noValidate autoComplete="off">
@@ -117,6 +116,9 @@ const SaleItems = (props) => {
               Search
             </Button>
           </Grid>
+            <Typography align="center" variant="h6">
+            {props.purchase_message}
+          </Typography>
         </div>
       </form>
       <Dialog open={open} onClose={handleLoginToggle} fullWidth>
@@ -134,7 +136,8 @@ const mapStateToProps = (state) => {
   return {
     specId: state.items.spec_id,
     notFound: state.items.err_message,
-    user : state.users
+    user : state.users,
+    purchase_message: state.items.sold_message
   };
 };
 const mapDispatchToProps = (dispatch) => {

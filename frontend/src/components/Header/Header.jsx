@@ -45,7 +45,11 @@ const Header = (props) => {
 
   const isLoggedIn = username ? (
     <div>
-      <AppBar data-test="headersComponent" position="static" className={classes.root}>
+      <AppBar
+        data-test="headersComponent"
+        position="static"
+        className={classes.root}
+      >
         <Toolbar>
           <Grid container spacing={1} justify="space-between">
             <Grid item container direction="row" alignContent="center">
@@ -53,15 +57,14 @@ const Header = (props) => {
               <Grid item>
                 <Typography variant="h6">{username}</Typography>
                 <Typography variant="h6">
-                  {cash && cash + " green_$"}{" "}
+                  {cash && cash + " green_$"}
                 </Typography>
               </Grid>
               <Grid item></Grid>
             </Grid>
           </Grid>
           <NavLink className={classes.link} to="/create">
-            {" "}
-            Sale you item{" "}
+            Sale you item
           </NavLink>
 
           <Button
@@ -70,15 +73,19 @@ const Header = (props) => {
               handelLogout();
             }}
           >
-            {" "}
-            Logout{" "}
+            
+            Logout
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   ) : (
     <div>
-      <AppBar data-test="headersComponentOnEmpty" className={classes.root} position="static">
+      <AppBar
+        data-test="headersComponentOnEmpty"
+        className={classes.root}
+        position="static"
+      >
         <Toolbar></Toolbar>
       </AppBar>
     </div>

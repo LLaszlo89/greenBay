@@ -1,4 +1,4 @@
-import { USER_LOADED , ERROR_MESSAGE_DB } from "../actions/actionTypes";
+import { USER_LOADED , USER_ERROR_MESSAGE_DB , NEW_CASH_BALANCE } from "../actions/actionTypes";
 
 const initialState = {
   username: localStorage.getItem('username') ,
@@ -21,11 +21,16 @@ export default function (state = initialState, action) {
         cash: action.payload.cash_balance,
         pic: action.payload.picture,
       };
-    case ERROR_MESSAGE_DB:
-      console.log(action.type,"**********************--")
+    case USER_ERROR_MESSAGE_DB:
       return {
         ...state,
         error_message: action.payload
+      };
+    case NEW_CASH_BALANCE:
+      localStorage.setItem("cash_balance", action.payload );
+      return {
+        ...state,
+        cash: action.payload
       };
 
     default:

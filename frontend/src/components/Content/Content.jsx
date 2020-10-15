@@ -1,30 +1,24 @@
 import React, { useEffect } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import { Grid } from "@material-ui/core";
-import { download_items_to_store } from "../../redux/actions/itemsActions";
+import { downloadItemsToStore } from "../../redux/actions/itemsActions";
 import { connect } from "react-redux";
 
-const Content = (props) => {
-  const { download_items, list } = props;
+const Content = ({ download_items, list }) => {
 
   useEffect(() => {
     download_items();
   }, [download_items]);
 
-  const ItemsCards = (item) => {
-
-    return (
-      <Grid key={item.id} item xs={12} sm={4}>
-        <ItemCard {...item} />
-      </Grid>
-    );
-  };
-
   return (
     <>
       {list.length > 0 && (
-        <Grid container spacing={1}>
-          {list[0].map((item) => ItemsCards(item))}
+        <Grid container >
+          {list[0].map((item) => (
+            <Grid key={item.id} item xs={12} sm={4}>
+              <ItemCard {...item} />
+            </Grid>
+          ))}
         </Grid>
       )}
     </>
@@ -39,7 +33,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    download_items: () => dispatch(download_items_to_store()),
+    download_items: () => dispatch(downloadItemsToStore()),
   };
 };
 
