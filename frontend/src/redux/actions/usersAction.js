@@ -1,8 +1,8 @@
-import { USER_LOADED , USER_ERROR_MESSAGE_DB } from "./actionTypes";
+import { USER_LOADED , USER_ERROR_MESSAGE_DB , LOGOUT } from "./actionTypes";
 import ApiReq from '../../apiRequest'
 const apiReq = new ApiReq()
 
-const url ="http://localhost:3000"
+const url ="https://lehel-greenbay.herokuapp.com"
 
 export const setUser = (values) => {
   return async (dispatch) => {
@@ -12,5 +12,10 @@ export const setUser = (values) => {
     } else{
       dispatch({ type: USER_LOADED, payload: data });
     }
+  };
+};
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch({ type: LOGOUT });
   };
 };

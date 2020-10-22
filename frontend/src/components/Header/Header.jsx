@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import { logout } from "../../redux/actions/usersAction";
 
 const useStyles = makeStyles({
   root: {
@@ -38,9 +39,9 @@ const Header = (props) => {
   const classes = useStyles();
   const { username, cash, pic } = props.user;
 
+
   const handelLogout = () => {
-    localStorage.clear();
-    window.location.reload();
+    props.logoutUser();
   };
 
   const isLoggedIn = username ? (
@@ -73,7 +74,6 @@ const Header = (props) => {
               handelLogout();
             }}
           >
-            
             Logout
           </Button>
         </Toolbar>
@@ -96,8 +96,14 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.users,
+    user: state.users
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

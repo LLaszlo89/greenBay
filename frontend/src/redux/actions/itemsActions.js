@@ -12,7 +12,7 @@ import {
 import ApiReq from "../../apiRequest";
 const apiReq = new ApiReq();
 
-const url = "http://localhost:3000/api/items";
+const url = "https://lehel-greenbay.herokuapp.com/api/items";
 
 export const downloadItemsToStore = () => {
   return async (dispatch) => {
@@ -48,8 +48,6 @@ export const itemSold = (item_id) => {
 
     const response = await apiReq.setHeaderToken("PUT", url, data, token);
 
-    console.log(response.message);
-
     if (!response.cash) {
       dispatch({ type: ITEM_ERROR_MESSAGE_DB, payload: response.message });
     } else {
@@ -68,7 +66,7 @@ export const addNewItem = ({ title, URL, price, description }) => {
 
     const resp = await apiReq.setHeaderToken(
       "POST",
-      `http://localhost:3000/api/items`,
+      url,
       values,
       token
     );
